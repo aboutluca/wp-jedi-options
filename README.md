@@ -1,7 +1,7 @@
 wp-jedi-options
 ===============
 
-Php class that permit to create an options page in wordpress with multiple type of input by passing an array.
+wpJediOptions is a Php class that permit to create an options page in wordpress with multiple type of input by passing an array.
 
 
 Here a full example explains what you can do with this library:
