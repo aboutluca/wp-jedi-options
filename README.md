@@ -36,7 +36,7 @@ Here a full example explains what you can do with this library:
                             "label" => "Title 1",
                             /* Options name for retrive / save them */
                             "name" => "title_1",
-                            /* Type: you can choose trough text/richtext/select/map/image/checkbox */
+                            /* Type: you can choose trough text/richtext/select/map/image/checkbox/colorpicker */
                             "type" => "text",
                             /* Description help the user */
                             "description" => "Insert the title",
@@ -88,6 +88,14 @@ Here a full example explains what you can do with this library:
                             "name" => "checkbox_example",
                             "type" => "checkbox",
                             "description" => "Check or not check"
+                        )
+                        
+                        /* Example of colorpicker */
+                        "field_6" => Array(
+                            "label" => "Colorpicker 1",
+                            "name" => "colorpicker_example",
+                            "type" => "colorpicker",
+                            "description" => "Choose you preferite color"
                         )
                         
                     )
