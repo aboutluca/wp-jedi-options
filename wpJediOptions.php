@@ -467,7 +467,7 @@ class wpJediOptions
     }
     
     /** 
-     * Get the settings option array and print one of its values (IMAGES)
+     * Get the settings option array and print one of its values (COLORPICKER)
      */
     public function colorpicker_callback($data)
     {   
@@ -479,7 +479,9 @@ class wpJediOptions
     <?php   
     }
     
-    
+    /** 
+     * Generate css for the options page
+     */
     private function genereteCSS() {
         ob_start(); ?>       
         <style type="text/css">
@@ -547,7 +549,9 @@ class wpJediOptions
         
     }
     
-    
+    /** 
+     * Generate js for the options page
+     */
     private function generateJS() {
             
             ob_start(); ?>  
@@ -630,12 +634,19 @@ class wpJediOptions
             
         }
         
+        
+        /** 
+	 * Enqueue the color picker library in the options page
+	*/
         public function enqueue_color_picker( $hook_suffix ) {
             wp_enqueue_style( 'wp-color-picker' );
             wp_enqueue_script( 'wp-color-picker' );
             //wp_enqueue_script( 'my-script-handle', plugins_url('my-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
         }
         
+        /** 
+	 * Retrive one option from the options saved
+	*/
         public static function get_option($options_name,$option) {
             
             $options = get_option($options_name);
