@@ -134,7 +134,7 @@ class wpJediOptions
         
         foreach($this->options_tree as $option=>$data) {
             
-            $ex_options[$data['name'].'_'.$data['language']] = '';
+            $ex_options[$data['name'].$data['language']] = '';
             
                 $method = $data['type'].'_callback';
             
@@ -205,9 +205,9 @@ class wpJediOptions
     {
         
         printf(
-            '<p>%s</p><input class="text-inpt-1" type="text" name="'.$this->options_name.'['.$data['name'].'_'.$data['language'].']" value="%s" />',
+            '<p>%s</p><input class="text-inpt-1" type="text" name="'.$this->options_name.'['.$data['name'].$data['language'].']" value="%s" />',
             isset( $data["description"] ) ? $data["description"] : '',
-            isset( $this->options[$data['name'].'_'.$data['language']] ) ? $this->options[$data['name'].'_'.$data['language']] : ''
+            isset( $this->options[$data['name'].$data['language']] ) ? $this->options[$data['name'].$data['language']] : ''
         );
     }
     
@@ -228,13 +228,13 @@ class wpJediOptions
     {   
     ?>
     <div class="box-1">
-        <input class="img_url" type="hidden" name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].']'; ?>" value="<?php echo esc_url($this->options[$data['name'].'_'.$data['language']]); ?>" />
-        <input class="img_id" type="hidden" name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].'_id]'; ?>" value="<?php echo $this->options[$data['name'].'_'.$data['language'].'_id']; ?>" />
+        <input class="img_url" type="hidden" name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>" value="<?php echo esc_url($this->options[$data['name'].$data['language']]); ?>" />
+        <input class="img_id" type="hidden" name="<?php echo $this->options_name.'['.$data['name'].$data['language'].'_id]'; ?>" value="<?php echo $this->options[$data['name'].$data['language'].'_id']; ?>" />
         <div class="img_preview" style="min-height: 100px;">  
             <p><?php echo $data['description']; ?></p>
-            <img class="img_preview_small" src="<?php echo ($this->options[$data['name'].'_'.$data['language']] != "") ? esc_url($this->options[$data['name'].'_'.$data['language']]) : bloginfo('template_url').'/assets/images/cms/no-image.png'; ?>" />  
+            <img class="img_preview_small" src="<?php echo ($this->options[$data['name'].$data['language']] != "") ? esc_url($this->options[$data['name'].$data['language']]) : bloginfo('template_url').'/assets/images/cms/no-image.png'; ?>" />  
             <div class="edit-btn">
-                <a href="javascript:void(0);" class="upload_image_button"><?php echo ($this->options[$data['name'].'_'.$data['language']] != "") ? 'Edit' : 'Upload'; ?></a> <?php if ($this->options[$data['name'].'_'.$data['language']] != "") { ?>- <a href="javascript:void(0);" class="remove_image_button">Rimuovi immagine</a><?php } ?>
+                <a href="javascript:void(0);" class="upload_image_button"><?php echo ($this->options[$data['name'].$data['language']] != "") ? 'Edit' : 'Upload'; ?></a> <?php if ($this->options[$data['name'].$data['language']] != "") { ?>- <a href="javascript:void(0);" class="remove_image_button">Rimuovi immagine</a><?php } ?>
             </div>
         </div> 
     </div>
@@ -251,9 +251,9 @@ class wpJediOptions
         <p>
             <?php echo $data['description']; ?>
         </p>
-        <select name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].']'; ?>">
+        <select name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>">
             <?php foreach ($data['options'] as $key=>$opt) { ?>
-                <option value="<?php echo $key; ?>" <?php echo ($key == $this->options[$data['name'].'_'.$data['language']]) ? "selected" : ""; ?>><?php echo $opt; ?></option>
+                <option value="<?php echo $key; ?>" <?php echo ($key == $this->options[$data['name'].$data['language']]) ? "selected" : ""; ?>><?php echo $opt; ?></option>
             <?php } ?>
         </select>
     <?php   
@@ -272,13 +272,13 @@ class wpJediOptions
         
         <?php
         $id = $data['name'];
-        $content = $this->options[$data['name'].'_'.$data['language']];
+        $content = $this->options[$data['name'].$data['language']];
         $ed_args = array(
             "textarea_rows" => 5, 
             "textarea_name" => $name, 
             "editor_class" => "jedi_richtext",
             "media_buttons" => false,
-            "textarea_name" => $this->options_name.'['.$data['name'].'_'.$data['language'].']');
+            "textarea_name" => $this->options_name.'['.$data['name'].$data['language'].']');
 
         wp_editor($content, $id, $ed_args);
         
@@ -299,7 +299,7 @@ class wpJediOptions
             <?php echo $data['description']; ?>
         </p>
         
-        <input type="checkbox" value="on" <?php if ($this->options[$data['name'].'_'.$data['language']] == 'on') { ?>checked=""<?php } ?> name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].']'; ?>"> <?php echo $data['label']; ?>
+        <input type="checkbox" value="on" <?php if ($this->options[$data['name'].$data['language']] == 'on') { ?>checked=""<?php } ?> name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>"> <?php echo $data['label']; ?>
         
     <?php   
     }
@@ -324,10 +324,10 @@ class wpJediOptions
         </p>	
 
         
-        <input type="hidden" id="jedi_location_<?php echo $data['name'].'_'.$data['language']; ?>" name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].']'; ?>" value="<?php echo $this->options[$data['name'].'_'.$data['language']]; ?>" />
+        <input type="hidden" id="jedi_location_<?php echo $data['name'].$data['language']; ?>" name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>" value="<?php echo $this->options[$data['name'].$data['language']]; ?>" />
         <div style="width: 100%;height:300px;position: relative;">
                 <?php 
-                $coords = $this->options[$data['name'].'_'.$data['language']];
+                $coords = $this->options[$data['name'].$data['language']];
 
 
                 if ($coords == "") {
@@ -349,14 +349,14 @@ class wpJediOptions
 
                 ?>
                 <style type="text/css">
-                        #addmarker-map-<?php echo $data['name'].'_'.$data['language']; ?> {
+                        #addmarker-map-<?php echo $data['name'].$data['language']; ?> {
                                 width: 100%;
                                 height: 100%;
                                 float: left;
                                 display: inline-block;
                         }
                         
-                        #panel-<?php echo $data['name'].'_'.$data['language']; ?> {
+                        #panel-<?php echo $data['name'].$data['language']; ?> {
                             position: absolute;
                             top: 5px;
                             left: 50%;
@@ -370,28 +370,28 @@ class wpJediOptions
 
                 <script type="text/javascript">
                     
-                function codeAddress_<?php echo $data['name'].'_'.$data['language']; ?>() {
-                    var address = document.getElementById('address-<?php echo $data['name'].'_'.$data['language']; ?>').value;
-                    geocoder_<?php echo $data['name'].'_'.$data['language']; ?>.geocode( { 'address': address}, function(results, status) {
+                function codeAddress_<?php echo $data['name'].$data['language']; ?>() {
+                    var address = document.getElementById('address-<?php echo $data['name'].$data['language']; ?>').value;
+                    geocoder_<?php echo $data['name'].$data['language']; ?>.geocode( { 'address': address}, function(results, status) {
                       if (status == google.maps.GeocoderStatus.OK) {
                     
-                        map_<?php echo $data['name'].'_'.$data['language']; ?>.setCenter(results[0].geometry.location);
-                        marker_<?php echo $data['name'].'_'.$data['language']; ?>.setPosition(results[0].geometry.location);
-                        var posToSave = marker_<?php echo $data['name'].'_'.$data['language']; ?>.getPosition();
-                        jQuery('#jedi_location_<?php echo $data['name'].'_'.$data['language']; ?>').val(posToSave);
+                        map_<?php echo $data['name'].$data['language']; ?>.setCenter(results[0].geometry.location);
+                        marker_<?php echo $data['name'].$data['language']; ?>.setPosition(results[0].geometry.location);
+                        var posToSave = marker_<?php echo $data['name'].$data['language']; ?>.getPosition();
+                        jQuery('#jedi_location_<?php echo $data['name'].$data['language']; ?>').val(posToSave);
                       } else {
                         alert('Geocode was not successful for the following reason: ' + status);
                       }
                     });
                   }
 
-                var geocoder_<?php echo $data['name'].'_'.$data['language']; ?>;
-                var map_<?php echo $data['name'].'_'.$data['language']; ?>;
-                var marker_<?php echo $data['name'].'_'.$data['language']; ?>;
+                var geocoder_<?php echo $data['name'].$data['language']; ?>;
+                var map_<?php echo $data['name'].$data['language']; ?>;
+                var marker_<?php echo $data['name'].$data['language']; ?>;
                 jQuery(document).ready(function(){
                     
                         
-                        geocoder_<?php echo $data['name'].'_'.$data['language']; ?> = new google.maps.Geocoder();
+                        geocoder_<?php echo $data['name'].$data['language']; ?> = new google.maps.Geocoder();
 
                         // fornisce latitudine e longitudine
                         var latlng = new google.maps.LatLng(<?php echo $lat; ?>, <?php echo $lng; ?>);
@@ -403,21 +403,21 @@ class wpJediOptions
                         };
 
                         // crea l'oggetto mappa
-                        map_<?php echo $data['name'].'_'.$data['language']; ?> = new google.maps.Map(document.getElementById('addmarker-map-<?php echo $data['name'].'_'.$data['language']; ?>'), options);
+                        map_<?php echo $data['name'].$data['language']; ?> = new google.maps.Map(document.getElementById('addmarker-map-<?php echo $data['name'].$data['language']; ?>'), options);
 
 
-                        marker_<?php echo $data['name'].'_'.$data['language']; ?> = new google.maps.Marker({ position: latlng,
-                        map: map_<?php echo $data['name'].'_'.$data['language']; ?>, 
+                        marker_<?php echo $data['name'].$data['language']; ?> = new google.maps.Marker({ position: latlng,
+                        map: map_<?php echo $data['name'].$data['language']; ?>, 
                         draggable: true,
                         title: 'Marker dell\'oggetto' });
 
 
-                        google.maps.event.addListener(marker_<?php echo $data['name'].'_'.$data['language']; ?>, 'dragend', function() { 
-                                var posToSave = marker_<?php echo $data['name'].'_'.$data['language']; ?>.getPosition();
+                        google.maps.event.addListener(marker_<?php echo $data['name'].$data['language']; ?>, 'dragend', function() { 
+                                var posToSave = marker_<?php echo $data['name'].$data['language']; ?>.getPosition();
 
 
-                                if (jQuery('#jedi_location_<?php echo $data['name'].'_'.$data['language']; ?>').length > 0)
-                                        jQuery('#jedi_location_<?php echo $data['name'].'_'.$data['language']; ?>').val(posToSave);
+                                if (jQuery('#jedi_location_<?php echo $data['name'].$data['language']; ?>').length > 0)
+                                        jQuery('#jedi_location_<?php echo $data['name'].$data['language']; ?>').val(posToSave);
 
                         });
 
@@ -426,10 +426,10 @@ class wpJediOptions
                 </script>
 
 
-        <div id="addmarker-map-<?php echo $data['name'].'_'.$data['language']; ?>"></div>
-        <div id="panel-<?php echo $data['name'].'_'.$data['language']; ?>">
-            <input id="address-<?php echo $data['name'].'_'.$data['language']; ?>" type="textbox" value="Venezia, Italia"> 
-            <input type="button" value="Geocode" onclick="codeAddress_<?php echo $data['name'].'_'.$data['language']; ?>()">
+        <div id="addmarker-map-<?php echo $data['name'].$data['language']; ?>"></div>
+        <div id="panel-<?php echo $data['name'].$data['language']; ?>">
+            <input id="address-<?php echo $data['name'].$data['language']; ?>" type="textbox" value="Venezia, Italia"> 
+            <input type="button" value="Geocode" onclick="codeAddress_<?php echo $data['name'].$data['language']; ?>()">
         </div>
         </div>
         
@@ -445,7 +445,7 @@ class wpJediOptions
     <p>
     <?php echo $data["description"]; ?>
     </p>
-    <input type="text" value="<?php echo $this->options[$data['name'].'_'.$data['language']]; ?>" name="<?php echo $this->options_name.'['.$data['name'].'_'.$data['language'].']'; ?>" class="my-color-field" />
+    <input type="text" value="<?php echo $this->options[$data['name'].$data['language']]; ?>" name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>" class="my-color-field" />
     <?php   
     }
     
