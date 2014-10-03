@@ -1,7 +1,7 @@
 wp-jedi-options
 ===============
 
-wpJediOptions is a **php class for wordpress** that permit to create an options page with multiple type of input by passing an array. The inputs types are pre built using wordpress's api. They are:
+wpJediOptions is a **php class for wordpress** that permit to create an options page with multiple type of input by passing an array. The library require Wordpress 3.5 or later. The inputs types are pre built using wordpress's api. They are:
 * Richtext editor
 * Simple Text
 * Select input
