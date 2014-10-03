@@ -93,7 +93,7 @@ Utilization
         
         ?>
 
-Constructior Params
+Constructor Params
 ==
 
 "page_title" => Set the title for the admin Page created (string)
