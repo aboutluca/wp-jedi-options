@@ -1,14 +1,14 @@
 wp-jedi-options
 ===============
 
-wpJediOptions is a **php class for wordpress** that permit to create an options page with multiple type of input by passing an array. The type are prebuilt using wordpress api. They are:
-* Richtext with using wordpress api
+wpJediOptions is a **php class for wordpress** that permit to create an options page with multiple type of input by passing an array. The inputs types are prebuilt using wordpress api. They are:
+* Richtext editor
 * Simple Text
 * Select input
-* Image upload using wordpress api
+* Image upload
 * Add a marker on a map using google map api. (Geocode search and draggable marker)
 * Simple checkbox
-* Colorpicker using wordpress colorpicker
+* Colorpicker
 
 #### Installation
 What you have to do to make it works is:
@@ -26,8 +26,8 @@ What you have to do to make it works is:
         
                 Array(
                 
-                    "page_title" => "Opzioni jedi",
-                    "page_menu_title" => "Opzioni",
+                    "page_title" => "Jedi options",
+                    "page_menu_title" => "Options",
                     "page_note" => "Note that the fields must be compiled for each language",
                     "page_slug" => 'jedi-setting',
                     "options_name" => 'jedi_option',
