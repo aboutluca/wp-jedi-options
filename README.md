@@ -1,10 +1,45 @@
 wp-jedi-options
 ===============
 
-wpJediOptions is a php class that permit to create an options page in wordpress with multiple type of input by passing an array.
+wpJediOptions is a **php class for wordpress** that permit to create an options page with multiple type of input by passing an array.
 
 What you have to do to make it works is include it in functions.php in your theme and then add some code in the same file.
 
+
+
+Constructor Params
+-----------------
+
+"page_title" => Set the title for the admin Page created (string)
+
+"page_menu_title" => Set the title for the page in the admin menu (string)
+
+"page_note" => Set the page description under the title in the page, helpful to explain to user (string)
+
+"page_slug" => Set the slug in the url for the page only _ and - are accepted as special char (string)
+
+"options_name" => The name for your options (string)
+
+"options_group" => The name for your optionsgroup (string)
+
+"options" => The array of options you would create (array)
+
+Options Params
+--------------
+
+"label" => The label of the input (string)
+
+"name" => The input name (special char only - or _ ) (string)
+
+"description" => The description helpful for the user (string)
+
+"type" => The option type (text/richtext/select/map/image/checkbox/colorpicker) (string)
+
+"language" => Optional, if you pass a variable you can have a multiple language field (string)
+
+"options" => Optional, if you use a "select" type you can pass an array of value. The key of the array is the value, the value is the label
+
+"sanitize" => TODO
 
 Utilization
 ==
@@ -93,39 +128,6 @@ Utilization
         
         ?>
 
-Constructor Params
-==
-
-"page_title" => Set the title for the admin Page created (string)
-
-"page_menu_title" => Set the title for the page in the admin menu (string)
-
-"page_note" => Set the page description under the title in the page, helpful to explain to user (string)
-
-"page_slug" => Set the slug in the url for the page only _ and - are accepted as special char (string)
-
-"options_name" => The name for your options (string)
-
-"options_group" => The name for your optionsgroup (string)
-
-"options" => The array of options you would create (array)
-
-Options Params
-==
-
-"label" => The label of the input (string)
-
-"name" => The input name (special char only - or _ ) (string)
-
-"description" => The description helpful for the user (string)
-
-"type" => The option type (text/richtext/select/map/image/checkbox/colorpicker) (string)
-
-"language" => Optional, if you pass a variable you can have a multiple language field (string)
-
-"options" => Optional, if you use a "select" type you can pass an array of value. The key of the array is the value, the value is the label
-
-"sanitize" => TODO
 
 
 
