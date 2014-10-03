@@ -50,7 +50,6 @@ Here a full example explains what you can do with this library:
                             "name" => "multiple_value",
                             "type" => "select",
                             "description" => "Select between options",
-                            "language" =>ICL_LANGUAGE_CODE,
                             "options" => Array(
                                 /* Array: The key as the value; The value as the label */
                                 "1" => "Value 1",
@@ -65,7 +64,6 @@ Here a full example explains what you can do with this library:
                             "name" => "richtext_1",
                             "type" => "richtext",
                             "description" => "Insert the richtext",
-                            "language" =>'',
                         ),
                         
                         /* Example of image */
@@ -73,8 +71,7 @@ Here a full example explains what you can do with this library:
                             "label" => "Example of image field",
                             "name" => "image_1",
                             "type" => "image",
-                            "description" => "Choose image to upload",
-                            "sanitize" => ""
+                            "description" => "Choose image to upload"
                         ),
                         
                         /* Example of map */
@@ -82,8 +79,7 @@ Here a full example explains what you can do with this library:
                             "label" => "Position 1",
                             "name" => "mappa1",
                             "type" => "map",
-                            "description" => "Search the zone by the geocode or drag the marker where you want",
-                            "sanitize" => ""
+                            "description" => "Search the zone by the geocode or drag the marker where you want"
                         ),
                         
                         /* Example of checkbox */
@@ -91,11 +87,20 @@ Here a full example explains what you can do with this library:
                             "label" => "Checkbox 1",
                             "name" => "checkbox_example",
                             "type" => "checkbox",
-                            "description" => "Check or not check",
-                            "sanitize" => ""
+                            "description" => "Check or not check"
                         )
                         
                     )
                 )
         
         );
+        
+        /* Retrive one multilanguage option: */
+        $option_title = JediOptions::get_option('jedi_option', 'title_1'.strtolower(ICL_LANGUAGE_CODE));
+        
+        /* Retrive an image ID (when you add image field automatically the library save ID for you): */
+        $option_image = JediOptions::get_option('jedi_option', 'image_1_id');
+        
+        /* Retrive one normal option: */
+        $option_richtext = JediOptions::get_option('jedi_option', 'richtext_1');
+        
