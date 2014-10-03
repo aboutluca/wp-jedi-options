@@ -1,4 +1,34 @@
 <?php
+/*~ wpJediOptions.php
+.---------------------------------------------------------------------------.
+|  Software: wpJediOptions - PHP class for wordpress to create options page |
+|   Version: 1.0                                                            |
+|   Contact: via github.com support pages                                   |
+|      Info: https://github.com/lukelojedi/wp-jedi-options                  |
+|   Support: https://github.com/lukelojedi/wp-jedi-options                  |
+| ------------------------------------------------------------------------- |
+|     Admin: Luca Nardi (project admininistrator)                           |
+|   Authors: Luca Nardi                                                     |
+|   Founder: Luca Nardi                                                     |
+| Copyright (c) 20014, Luca Nardi. All Rights Reserved.                     |
+| ------------------------------------------------------------------------- |
+|   License: Distributed under the MIT License                              |
+|   https://github.com/lukelojedi/wp-jedi-options/blob/master/LICENSE       |
+| This program is distributed in the hope that it will be useful - WITHOUT  |
+| ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     |
+| FITNESS FOR A PARTICULAR PURPOSE.                                         |
+'---------------------------------------------------------------------------'
+*/
+
+/**
+ * wpJediOptions - HP class for wordpress to create options page
+ * NOTE: Requires Wordpress 3.5 or later
+ * @package wpJediOptions
+ * @author Luca Nardi
+ * @copyright 2014 Luca Nardi
+ * @version 1.0
+ * @license https://github.com/lukelojedi/wp-jedi-options/blob/master/LICENSE MIT License
+ */
 class wpJediOptions
 {
     /**
