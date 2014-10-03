@@ -1,64 +1,47 @@
 wp-jedi-options
 ===============
 
-wpJediOptions is a Php class that permit to create an options page in wordpress with multiple type of input by passing an array.
+wpJediOptions is a php class that permit to create an options page in wordpress with multiple type of input by passing an array.
+
+What you have to do to make it works is include it in functions.php in your theme and then add some code in the same file.
 
 
-Here a full example explains what you can do with this library:
+Utilization
+==
 
-
-        
-        
+        <?php        
         $options = new wpJediOptions(
         
                 Array(
                 
-                    /* Wordpress admin Page title */
                     "page_title" => "Opzioni jedi",
-                    /* Wordpress page title on the admin menu */
                     "page_menu_title" => "Opzioni",
-                    /* Page description under the title */
                     "page_note" => "Note that the fields must be compiled for each language",
-                    /* Page slug on the url */
                     "page_slug" => 'jedi-setting',
-                    /* Options name for retrive them */
                     "options_name" => 'jedi_option',
-                    /* Options name for retrive / save them */
                     "options_group" => 'jedi_option_group',
-                    
-                
-                    /* Here the array to pass */
                     "options" =>  Array(
                     
-                        /* Example of simple text */
                         "field_1" => Array(
-                            /* Options label for user interface */
                             "label" => "Title 1",
-                            /* Options name for retrive / save them */
                             "name" => "title_1",
-                            /* Type: you can choose trough text/richtext/select/map/image/checkbox/colorpicker */
                             "type" => "text",
-                            /* Description help the user */
                             "description" => "Insert the title",
-                            /* Language: multilang ready, if you use wpml can pass ICL_LANGUAGE_CODE or a variable in other case */
                             "language" =>ICL_LANGUAGE_CODE,
                         ),
                         
-                        /* Example of multiple value */
                         "field_2" => Array(
                             "label" => "Select trough multiple value",
                             "name" => "multiple_value",
                             "type" => "select",
                             "description" => "Select between options",
                             "options" => Array(
-                                /* Array: The key as the value; The value as the label */
                                 "1" => "Value 1",
                                 "2" => "Value 2",
                                 "3" => "Value 3"
                             )
                         ),
                         
-                        /* Example of richtext */
                         "field_3" => Array(
                             "label" => "Example of rich text field",
                             "name" => "richtext_1",
@@ -66,7 +49,6 @@ Here a full example explains what you can do with this library:
                             "description" => "Insert the richtext",
                         ),
                         
-                        /* Example of image */
                         "field_4" => Array(
                             "label" => "Example of image field",
                             "name" => "image_1",
@@ -74,7 +56,6 @@ Here a full example explains what you can do with this library:
                             "description" => "Choose image to upload"
                         ),
                         
-                        /* Example of map */
                         "field_5" => Array(
                             "label" => "Position 1",
                             "name" => "mappa1",
@@ -82,7 +63,6 @@ Here a full example explains what you can do with this library:
                             "description" => "Search the zone by the geocode or drag the marker where you want"
                         ),
                         
-                        /* Example of checkbox */
                         "field_6" => Array(
                             "label" => "Checkbox 1",
                             "name" => "checkbox_example",
@@ -90,7 +70,6 @@ Here a full example explains what you can do with this library:
                             "description" => "Check or not check"
                         )
                         
-                        /* Example of colorpicker */
                         "field_6" => Array(
                             "label" => "Colorpicker 1",
                             "name" => "colorpicker_example",
@@ -111,4 +90,45 @@ Here a full example explains what you can do with this library:
         
         /* Retrive one normal option: */
         $option_richtext = JediOptions::get_option('jedi_option', 'richtext_1');
+        
+        ?>
+
+Constructior Params
+==
+
+"page_title" => Set the title for the admin Page created (string)
+
+"page_menu_title" => Set the title for the page in the admin menu (string)
+
+"page_note" => Set the page description under the title in the page, helpful to explain to user (string)
+
+"page_slug" => Set the slug in the url for the page only _ and - are accepted as special char (string)
+
+"options_name" => The name for your options (string)
+
+"options_group" => The name for your optionsgroup (string)
+
+"options" => The array of options you would create (array)
+
+Options Params
+==
+
+"label" => The label of the input (string)
+
+"name" => The input name (special char only - or _ ) (string)
+
+"description" => The description helpful for the user (string)
+
+"type" => The option type (text/richtext/select/map/image/checkbox/colorpicker) (string)
+
+"language" => Optional, if you pass a variable you can have a multiple language field (string)
+
+"options" => Optional, if you use a "select" type you can pass an array of value. The key of the array is the value, the value is the label
+
+"sanitize" => TODO
+
+
+
+
+
         
