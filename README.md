@@ -141,9 +141,22 @@ Documentation
 
 "sanitize" => TODO
 
+#### Retrive options
 
 
+To retrive an option you have to use this code:
 
+    wpJediOptions::get_option('options_name', 'single_opt_name')
+    
+where options_name is the name specified in the contructor and single_opt_name is "name" in options param.
+If you want to retrive by language with WPML add the code below:
+
+    wpJediOptions::get_option('options_name', 'single_opt_name'.strtolower(ICL_LANGUAGE_CODE))
+    
+    
+If you want to retrive the image ID add "_id" to the name of you image option
+
+    wpJediOptions::get_option('options_name', 'single_opt_name_id')
 
 
 
