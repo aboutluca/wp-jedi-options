@@ -192,7 +192,7 @@ class wpJediOptions
                 
                 $ar = explode("_",$key);
                 
-                if (in_array("id", $ar)) {
+                if (!in_array("id", $ar)) {
                 
                     add_settings_field(
                         $key, // ID
