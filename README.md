@@ -125,6 +125,8 @@ Documentation
 
 "options" => The array of options you would create (array)
 
+"options_parent_slug" => The slug of the parent page (optional)
+
 #### Options Params
 
 "label" => The label of the input (string)
