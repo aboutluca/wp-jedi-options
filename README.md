@@ -10,6 +10,9 @@ wpJediOptions is a **php class for wordpress** that permit to create an options 
 * Simple checkbox
 * Colorpicker
 
+#### Tutorial
+[Read the tutorial!](http://www.aboutluca.com/2014/11/13/create-theme-options-page-for-wordpress/)
+
 #### Installation
 What you have to do to make it works is:
 * Copy the WpJediOptions.php in your theme directory
