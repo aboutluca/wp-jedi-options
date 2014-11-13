@@ -42,6 +42,7 @@ class wpJediOptions
     private $options_name;
     private $page_slug;
     private $option_group;
+    private $options_parent;
 
     /**
      * Start up
@@ -59,6 +60,11 @@ class wpJediOptions
         $this->page_slug = $data['page_slug'];
         $this->options_name = $data['options_name'];
         $this->option_group = $data['options_group'];
+        $this->option_subpage = $data['option_subpage'];
+        $this->options_parent = $data['options_parent_slug'];
+        
+        
+  
             
     }
 
@@ -68,13 +74,20 @@ class wpJediOptions
     public function add_plugin_page()
     {
         // This page will be under "Settings"
-        add_menu_page(
-            $this->page_options_title, 
-            $this->page_menu_title, 
-            'manage_options', 
-            $this->page_slug, 
-            array( $this, 'create_admin_page' )
-        );
+        
+        if ($this->options_parent == "") {
+           
+            add_menu_page(
+                $this->page_options_title, 
+                $this->page_menu_title, 
+                'manage_options', 
+                $this->page_slug, 
+                array( $this, 'create_admin_page' )
+            );
+        } else {
+            add_submenu_page( $this->options_parent, $this->page_options_title, $this->page_menu_title, 'manage_options', $this->page_slug, array( $this, 'create_admin_page' ) ); 
+        }
+        //
         
     }
 
@@ -96,11 +109,11 @@ class wpJediOptions
             <?php if ($_GET['settings-updated']) { ?>
                 <?php if ($_GET['settings-updated'] == 'true') { ?>
                 <div id="setting-error-settings_updated" class="updated settings-error"> 
-                        <p><strong>Impostazioni salvate.</strong></p>
+                        <p><strong>Setting saved.</strong></p>
                 </div>
                 <?php } else { ?>
                 <div id="setting-error-settings_updated" class="error settings-error"> 
-                        <p><strong>Errore nel salvataggio.</strong></p>
+                        <p><strong>Error saving.</strong></p>
                 </div>
                 <?php } ?>
             <?php } ?>
@@ -110,7 +123,7 @@ class wpJediOptions
 
                         <!-- Update -->
                         <div class="postbox" style="position:fixed;">
-                            <h3 class="hndle"><span>Applica le modifiche</span></h3>
+                            <h3 class="hndle"><span>Apply change</span></h3>
                             <div class="inside">
                                     <?php submit_button(); ?>
                             </div>
@@ -182,30 +195,30 @@ class wpJediOptions
         }
         
         $this->options = get_option( $this->options_name );
+      
+        if ($this->options) {
         
-    
+            foreach($this->options as $key=>$opt) {
 
-        
-        foreach($this->options as $key=>$opt) {
-            
-            if (!array_key_exists($key, $ex_options)) {
-                
-                $ar = explode("_",$key);
-                
-                if (!in_array("id", $ar)) {
-                
-                    add_settings_field(
-                        $key, // ID
-                        '', // Title 
-                        array( $this, 'hidden_callback' ), // Callback
-                        $this->page_menu_title, // Page
-                        'jedi_section', // Section           
-                        Array($key=>$opt) // data passed
-                    );
+                if (!array_key_exists($key, $ex_options)) {
+
+                    $ar = explode("_",$key);
+
+                    if (!in_array("id", $ar)) {
+
+                        add_settings_field(
+                            $key, // ID
+                            '', // Title 
+                            array( $this, 'hidden_callback' ), // Callback
+                            $this->page_menu_title, // Page
+                            'jedi_section', // Section           
+                            Array($key=>$opt) // data passed
+                        );
+                    }
                 }
-                
+
             }
-            
+        
         }
         
      
