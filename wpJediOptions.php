@@ -301,6 +301,7 @@ class wpJediOptions
             <?php echo $data['description']; ?>
         </p>
         <select name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>">
+            <option value="" <?php echo ($key == "") ? "selected" : ""; ?>>Select</option>
             <?php foreach ($data['options'] as $key=>$opt) { ?>
                 <option value="<?php echo $key; ?>" <?php echo ($key == $this->options[$data['name'].$data['language']]) ? "selected" : ""; ?>><?php echo $opt; ?></option>
             <?php } ?>
