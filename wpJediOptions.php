@@ -232,11 +232,26 @@ class wpJediOptions
      */
     public function sanitize( $input )
     {
+	
+		
+		$new_input = array();
+	
+		foreach($input as $key=>$inp) {
+		
+			if (preg_match("/b64encode/", $inp)) {
+				$inp = str_replace('b64encode', '', $inp);
+				$inp = base64_decode($inp);
+				
+			} else {
+				//not 64
+			}
+			
+			$new_input[$key] = $inp;
+		
+		}
         
-        /* TODO - OPTIONALS */
-        $new_input = array();
 
-        return $input;
+        return $new_input;
     }
 
     /** 
@@ -264,8 +279,11 @@ class wpJediOptions
     {
         $key = array_keys($data);
         
-        ?>
-        <input type="hidden" name="<?php echo $this->options_name.'['.$key[0].']'; ?>" value="<?php echo $this->options[$key[0]]; ?>" />
+        
+		
+		?>
+        
+        <input class="hidden-field" type="hidden" name="<?php echo $this->options_name.'['.$key[0].']'; ?>" value="<?php echo base64_encode($this->options[$key[0]]).'b64encode'; ?>" />
          
         <?php
     }
@@ -301,7 +319,6 @@ class wpJediOptions
             <?php echo $data['description']; ?>
         </p>
         <select name="<?php echo $this->options_name.'['.$data['name'].$data['language'].']'; ?>">
-            <option value="" <?php echo ($key == "") ? "selected" : ""; ?>>Select</option>
             <?php foreach ($data['options'] as $key=>$opt) { ?>
                 <option value="<?php echo $key; ?>" <?php echo ($key == $this->options[$data['name'].$data['language']]) ? "selected" : ""; ?>><?php echo $opt; ?></option>
             <?php } ?>
@@ -321,7 +338,7 @@ class wpJediOptions
         </p>
         
         <?php
-        $id = $data['name'];
+        $id = $data['name'].$data['language'];
         $content = $this->options[$data['name'].$data['language']];
         $ed_args = array(
             "textarea_rows" => 5, 
@@ -578,6 +595,8 @@ class wpJediOptions
             <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
             <script type="text/javascript">
                     jQuery(document).ready(function($) {
+                        
+                            jQuery('.hidden-field').parent().parent().css("display","none");
 
                             var file_frame;
 
