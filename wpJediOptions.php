@@ -203,18 +203,36 @@ class wpJediOptions
                 if (!array_key_exists($key, $ex_options)) {
 
                     $ar = explode("_",$key);
-
-                    if (!in_array("id", $ar)) {
-
-                        add_settings_field(
-                            $key, // ID
-                            '', // Title 
-                            array( $this, 'hidden_callback' ), // Callback
-                            $this->page_menu_title, // Page
-                            'jedi_section', // Section           
-                            Array($key=>$opt) // data passed
-                        );
-                    }
+		
+		    $todo = true;
+					
+			if (defined('ICL_LANGUAGE_CODE')) {
+			
+				if (in_array("id", $ar)) {
+				
+				
+					if (preg_match("/".strtolower(ICL_LANGUAGE_CODE)."/",$ar[2])) {
+						$todo = false;
+					}
+				}
+				
+				
+			}
+					
+				
+		        if ($todo) {
+		                add_settings_field(
+		                    $key, // ID
+		                    '', // Title 
+		                    array( $this, 'hidden_callback' ), // Callback
+		                    $this->page_menu_title, // Page
+		                    'jedi_section', // Section           
+		                    Array($key=>$opt) // data passed
+		                );
+		        }
+			
+			
+                    
                 }
 
             }
