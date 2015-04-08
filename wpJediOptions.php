@@ -19,7 +19,6 @@
 | FITNESS FOR A PARTICULAR PURPOSE.                                         |
 '---------------------------------------------------------------------------'
 */
-
 /**
  * wpJediOptions - HP class for wordpress to create options page
  * NOTE: Requires Wordpress 3.5 or later
@@ -43,7 +42,6 @@ class wpJediOptions
     private $page_slug;
     private $option_group;
     private $options_parent;
-
     /**
      * Start up
      */
@@ -67,7 +65,6 @@ class wpJediOptions
   
             
     }
-
     /**
      * Add options page
      */
@@ -90,7 +87,6 @@ class wpJediOptions
         //
         
     }
-
     /**
      * Options page callback
      */
@@ -152,7 +148,6 @@ class wpJediOptions
  
         <?php
     }
-
     /**
      * Register and add settings
      */
@@ -163,7 +158,6 @@ class wpJediOptions
             $this->options_name, // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
-
         add_settings_section(
             'jedi_section', // ID
             $this->page_options_title, // Title
@@ -173,7 +167,6 @@ class wpJediOptions
         
         $ex_options = Array();
         
-
         
         foreach($this->options_tree as $option=>$data) {
             
@@ -199,9 +192,7 @@ class wpJediOptions
         if ($this->options) {
         
             foreach($this->options as $key=>$opt) {
-
                 if (!array_key_exists($key, $ex_options)) {
-
                     $ar = explode("_",$key);
 		
 		    $todo = true;
@@ -210,8 +201,8 @@ class wpJediOptions
 			
 				if (in_array("id", $ar)) {
 				
-				
-					if (preg_match("/".strtolower(ICL_LANGUAGE_CODE)."/",$ar[2])) {
+                                    
+					if (preg_match("/".strtolower(ICL_LANGUAGE_CODE)."/",$ar[2]) || $ar[1] == 'image') {
 						$todo = false;
 					}
 				}
@@ -234,7 +225,6 @@ class wpJediOptions
 			
                     
                 }
-
             }
         
         }
@@ -242,7 +232,6 @@ class wpJediOptions
      
         
     }
-
     /**
      * Sanitize each setting field as needed
      *
@@ -252,6 +241,7 @@ class wpJediOptions
     {
 	
 		
+        
 		$new_input = array();
 	
 		foreach($input as $key=>$inp) {
@@ -268,10 +258,8 @@ class wpJediOptions
 		
 		}
         
-
         return $new_input;
     }
-
     /** 
      * Print the Section text
      */
@@ -279,7 +267,6 @@ class wpJediOptions
     {
         print '<div class="intro">'.$this->page_options_note.'</div>';
     }
-
     /** 
      * Get the settings option array and print one of its values (TEXT)
      */
@@ -297,15 +284,12 @@ class wpJediOptions
     {
         $key = array_keys($data);
         
-        
-		
-		?>
+        ?>
         
         <input class="hidden-field" type="hidden" name="<?php echo $this->options_name.'['.$key[0].']'; ?>" value="<?php echo base64_encode($this->options[$key[0]]).'b64encode'; ?>" />
          
-        <?php
+        <?php 
     }
-
     /** 
      * Get the settings option array and print one of its values (IMAGES)
      */
@@ -364,7 +348,6 @@ class wpJediOptions
             "editor_class" => "jedi_richtext",
             "media_buttons" => false,
             "textarea_name" => $this->options_name.'['.$data['name'].$data['language'].']');
-
         wp_editor($content, $id, $ed_args);
         
         
@@ -413,25 +396,18 @@ class wpJediOptions
         <div style="width: 100%;height:300px;position: relative;">
                 <?php 
                 $coords = $this->options[$data['name'].$data['language']];
-
-
                 if ($coords == "") {
                         /* Coordinate di default di meetodo */
                         $lat = '45.490580';
                         $lng = '12.247377';
                 } else {
-
                 $coords = str_replace("(","",$coords);
                 $coords = str_replace(")","",$coords);
                 $coords = str_replace(" ","",$coords);
-
-
                 $coords = explode(",",$coords);
-
                 $lat = $coords[0];
                 $lng = $coords[1]; 
                 }
-
                 ?>
                 <style type="text/css">
                         #addmarker-map-<?php echo $data['name'].$data['language']; ?> {
@@ -469,7 +445,6 @@ class wpJediOptions
                       }
                     });
                   }
-
                 var geocoder_<?php echo $data['name'].$data['language']; ?>;
                 var map_<?php echo $data['name'].$data['language']; ?>;
                 var marker_<?php echo $data['name'].$data['language']; ?>;
@@ -477,37 +452,25 @@ class wpJediOptions
                     
                         
                         geocoder_<?php echo $data['name'].$data['language']; ?> = new google.maps.Geocoder();
-
                         // fornisce latitudine e longitudine
                         var latlng = new google.maps.LatLng(<?php echo $lat; ?>, <?php echo $lng; ?>);
-
                         // imposta le opzioni di visualizzazione
                         var options = { zoom: 12,
                         center: latlng,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                         };
-
                         // crea l'oggetto mappa
                         map_<?php echo $data['name'].$data['language']; ?> = new google.maps.Map(document.getElementById('addmarker-map-<?php echo $data['name'].$data['language']; ?>'), options);
-
-
                         marker_<?php echo $data['name'].$data['language']; ?> = new google.maps.Marker({ position: latlng,
                         map: map_<?php echo $data['name'].$data['language']; ?>, 
                         draggable: true,
                         title: 'Marker dell\'oggetto' });
-
-
                         google.maps.event.addListener(marker_<?php echo $data['name'].$data['language']; ?>, 'dragend', function() { 
                                 var posToSave = marker_<?php echo $data['name'].$data['language']; ?>.getPosition();
-
-
                                 if (jQuery('#jedi_location_<?php echo $data['name'].$data['language']; ?>').length > 0)
                                         jQuery('#jedi_location_<?php echo $data['name'].$data['language']; ?>').val(posToSave);
-
                         });
-
                 })
-
                 </script>
 
 
@@ -550,7 +513,6 @@ class wpJediOptions
                     margin: 20px 0;
                     padding: 0 12px;
                 }
-
                 .field {
                         padding: 15px 10px;
                         border-top: #e8e8e8 solid 1px;
@@ -561,20 +523,16 @@ class wpJediOptions
                     width: 50%;
                     
                 }
-
                 .img_preview_small {
                         max-width:200px;
                         display:inline-block;
                         vertical-align: middle;
                 }
-
                 .edit-btn {
                         display:inline-block;
                         vertical-align: middle;
                         margin-left: 5px;
                 }
-
-
                 .field p.label {
                         font-size: 12px;
                         line-height: 1.5em;
@@ -583,7 +541,6 @@ class wpJediOptions
                         color: #666666;
                         text-shadow: 0 1px 0 #FFFFFF;
                 }
-
                 .field p.label label {
                         color: #333333;
                         font-size: 13px;
@@ -594,12 +551,10 @@ class wpJediOptions
                         display: block;
                         vertical-align: text-bottom;
                 }
-
         </style>
         <?php
         $out = ob_get_contents();
         ob_end_clean();
-
         return $out;
         
     }
@@ -615,23 +570,17 @@ class wpJediOptions
                     jQuery(document).ready(function($) {
                         
                             jQuery('.hidden-field').parent().parent().css("display","none");
-
                             var file_frame;
-
                             jQuery('.upload_image_button').live('click', function( event ){
-
                             target_1 = $(this).parent().parent().siblings('.img_url');
                             target_2 = $(this).parent().parent().siblings('.img_id');
                             target_3 = $(this).parent().siblings('.img_preview_small');
-
                             event.preventDefault();
-
                             // If the media frame already exists, reopen it.
                             if ( file_frame ) {
                               file_frame.open();
                               return;
                             }
-
                             // Create the media frame.
                             file_frame = wp.media.frames.file_frame = wp.media({
                               title: jQuery( this ).data( 'uploader_title' ),
@@ -640,46 +589,29 @@ class wpJediOptions
                               },
                               multiple: false  // Set to true to allow multiple files to be selected
                             });
-
                             // When an image is selected, run a callback.
                             file_frame.on( 'select', function() {
                               // We set multiple to false so only get one image from the uploader
                               attachment = file_frame.state().get('selection').first().toJSON();
-
                               // Do something with attachment.id and/or attachment.url here
                               target_1.val(attachment.url); 
                               target_2.val(attachment.id); 
                               target_3.attr('src',attachment.url); 
-
                             });
-
                             // Finally, open the modal
                             file_frame.open();
                             });
-
-
                             jQuery('.remove_image_button').live('click', function( event ){
-
                             target_1 = $(this).parent().parent().siblings('.img_url');
                             target_2 = $(this).parent().parent().siblings('.img_id');
                             target_3 = $(this).parent().siblings('.img_preview_small');
-
                             target_1.val(''); 
                             target_2.val(''); 
                             target_3.attr('src','<?php bloginfo('template_url'); echo '/assets/images/cms/no-image.png'; ?>'); 
-
-
                             });
-
-
-
                             jQuery(document).ready(function($){
                                     $('.my-color-field').wpColorPicker();
                             });
-
-
-
-
                     });  
             </script>
             <?php
